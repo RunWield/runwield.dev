@@ -343,6 +343,17 @@ figure { margin: 0; }
 .article-body { font-size: clamp(1.125rem, 2vw, 1.25rem); line-height: 1.7; }
 .article-body p { margin: 0 0 1.65em; }
 .article-body img { display: block; max-width: 100%; height: auto; margin-bottom: 1.65em; }
+.article-body h2 { margin: 2em 0 .75em; color: var(--rw-text-strong); font-size: clamp(1.65rem, 3vw, 2.25rem); font-weight: 560; letter-spacing: -.025em; line-height: 1.2; text-wrap: balance; }
+.article-body ul { padding-left: 1.25em; margin-block: 0 1.65em; }
+.article-body li + li { margin-top: .75em; }
+.article-body code { font-family: var(--font-mono); font-size: .85em; }
+.article-body blockquote { margin: 1.65em 0; border-block: 1px solid var(--rw-border); padding-block: 1.25em; }
+.article-body blockquote p { margin: 0; }
+.article-body .article-reviewer { float: right; margin: 0 0 12px 24px; }
+.article-figure { margin-block: 2em; }
+.article-figure a { display: block; }
+.article-figure img { margin-bottom: 12px; border-radius: var(--rw-radius-control); }
+.article-figure figcaption { color: var(--rw-text-muted); font-size: 1rem; line-height: 1.5; }
 .back-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 36px; color: var(--rw-logo); font-family: var(--font-mono); font-size: .8rem; text-decoration: underline; text-underline-offset: 5px; }
 .blog-main a:focus-visible { outline: 2px solid var(--rw-accent); outline-offset: 5px; border-radius: 2px; }
 
