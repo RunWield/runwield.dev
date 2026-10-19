@@ -25,7 +25,7 @@ routingIntent: "PLANNED_CHANGE"
 sessionName: "Migrate Deno to Bun"
 targetBranch: "main"
 deliveryBranch: "main"
-status: "implemented"
+status: "reviewed"
 ---
 
 # Migrate the site toolchain from Deno to Bun
