@@ -1,9 +1,12 @@
-// Assert the public build, not the Markdown source. Run after `deno task build`.
-const index = await Deno.readTextFile("dist/blog/index.html");
-const article = await Deno.readTextFile("dist/blog/the-overconfident-intern/index.html");
-const legacyCodeArticle = await Deno.readTextFile("dist/blog/vibe-code-is-legacy-code/index.html");
-const home = await Deno.readTextFile("dist/index.html");
-const sitemap = await Deno.readTextFile("dist/sitemap-0.xml");
+// Assert the public build, not the Markdown source. Run after `bun run build`.
+import { test } from "bun:test";
+import { readFileSync, statSync } from "node:fs";
+
+const index = readFileSync("dist/blog/index.html", "utf8");
+const article = readFileSync("dist/blog/the-overconfident-intern/index.html", "utf8");
+const legacyCodeArticle = readFileSync("dist/blog/vibe-code-is-legacy-code/index.html", "utf8");
+const home = readFileSync("dist/index.html", "utf8");
+const sitemap = readFileSync("dist/sitemap-0.xml", "utf8");
 
 function assert(condition: unknown, message: string): asserts condition {
     if (!condition) throw new Error(message);
@@ -38,7 +41,7 @@ const title = "The Overconfident Intern: Why Your AI Assistant Is Burning Out Yo
 const description = "AI-generated code can shift work onto senior engineers. Collaborative planning and visible validation evidence offer a better way to review changes.";
 const route = "/blog/the-overconfident-intern";
 
-Deno.test("article renders the approved copy in order without unsupported claims", () => {
+test("article renders the approved copy in order without unsupported claims", () => {
     const rendered = [...article.matchAll(/<div class="article-body">([\s\S]*?)<\/div>/g)][0]?.[1];
     assert(rendered, "Article body is missing");
     const actual = [...rendered.matchAll(/<p>([\s\S]*?)<\/p>/g)].map((match) => text(match[1]));
@@ -49,18 +52,18 @@ Deno.test("article renders the approved copy in order without unsupported claims
     }
 });
 
-Deno.test("Vibe Code Is Legacy Code links to Steve Krouse's source article", () => {
+test("Vibe Code Is Legacy Code links to Steve Krouse's source article", () => {
     assert(legacyCodeArticle.includes('<a href="https://blog.val.town/vibe-code">Vibe code is legacy code</a>'), "Source article link is missing");
 });
 
-Deno.test("index links to the article and shows its date and description", () => {
+test("index links to the article and shows its date and description", () => {
     assert(index.includes(`<a href="${route}">${title}</a>`), "Index must link to published article");
     assert(index.includes(description), "Index description is missing");
     assert(index.includes('<time datetime="2026-09-27">'), "Index date is missing");
     assert(article.includes('href="/blog"><img src="/mascot/reviewer.svg" width="26" height="36" alt="" aria-hidden="true">Back to Wield Notes</a>'), "Back to Wield Notes with Reviewer is missing");
     assert(index.includes('<h1>Wield Notes</h1>'), "Blog name is missing");
     assert(index.includes('src="/mascot/reviewer.svg" width="52" height="72" alt="" aria-hidden="true"'), "Blog heading Reviewer is missing");
-    const reviewer = Deno.readTextFileSync("dist/mascot/reviewer.svg");
+    const reviewer = readFileSync("dist/mascot/reviewer.svg", "utf8");
     assert(reviewer.includes('shape-rendering="crispEdges"') && !reviewer.includes("animation"), "Reviewer must be a crisp, still SVG");
     assert(index.includes('<p class="blog-subtitle">Engineering judgment in the age of AI.</p>'), "Blog subtitle is missing");
     assert(article.includes('<a href="https://github.com/gandazgul">Carlos Ravelo</a>'), "Approved linked byline is missing");
@@ -71,7 +74,7 @@ Deno.test("index links to the article and shows its date and description", () =>
     }
 });
 
-Deno.test("blog metadata and assets resolve from both public URLs", () => {
+test("blog metadata and assets resolve from both public URLs", () => {
     for (const [page, path, pageTitle, pageDescription, type] of [
         [index, "/blog", "Wield Notes", "Engineering judgment in the age of AI.", "website"],
         [article, route, title, description, "article"],
@@ -89,13 +92,13 @@ Deno.test("blog metadata and assets resolve from both public URLs", () => {
         assert(fontUrls.length > 0, `No emitted font assets at ${path}`);
         for (const font of fontUrls) {
             assert(font.startsWith("/_astro/"), `Relative font URL at ${path}: ${font}`);
-            assert(Deno.statSync(`dist${font}`).isFile, `Missing emitted font: ${font}`);
+            assert(statSync(`dist${font}`).isFile(), `Missing emitted font: ${font}`);
         }
         assert(sitemap.includes(`<loc>https://runwield.dev${path}</loc>`), `Sitemap missing ${path}`);
     }
 });
 
-Deno.test("shared navigation retains home and external destinations", () => {
+test("shared navigation retains home and external destinations", () => {
     for (const page of [home, index, article]) {
         for (const href of ["/", "/#flow", "/blog", "https://docs.runwield.dev", "https://github.com/gandazgul/runwield/releases/latest", "/#beta"]) {
             assert(page.includes(`href="${href}"`), `Navigation lacks ${href}`);

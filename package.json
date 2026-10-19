@@ -1,0 +1,21 @@
+{
+  "name": "runwield-dev",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.4.3",
+  "scripts": {
+    "dev": "bunx --bun astro dev",
+    "build": "bunx --bun astro build",
+    "preview": "bunx --bun astro preview",
+    "check": "bunx --bun astro check",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "astro": "^7.2.0",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.7.0",
+    "@fontsource-variable/outfit": "^5.2.6",
+    "@fontsource/ibm-plex-mono": "^5.2.6",
+    "typescript": "^5.9.3"
+  }
+}
