@@ -1,6 +1,7 @@
 // Assert the public build, not the Markdown source. Run after `deno task build`.
 const index = await Deno.readTextFile("dist/blog/index.html");
 const article = await Deno.readTextFile("dist/blog/the-overconfident-intern/index.html");
+const legacyCodeArticle = await Deno.readTextFile("dist/blog/vibe-code-is-legacy-code/index.html");
 const home = await Deno.readTextFile("dist/index.html");
 const sitemap = await Deno.readTextFile("dist/sitemap-0.xml");
 
@@ -46,6 +47,10 @@ Deno.test("article renders the approved copy in order without unsupported claims
     for (const phrase of ["full audit trail that proves its correctness", "They can't reason", "They can't ask clarifying questions"]) {
         assert(!text(rendered).includes(phrase), `Unsupported claim: ${phrase}`);
     }
+});
+
+Deno.test("Vibe Code Is Legacy Code links to Steve Krouse's source article", () => {
+    assert(legacyCodeArticle.includes('<a href="https://blog.val.town/vibe-code">Vibe code is legacy code</a>'), "Source article link is missing");
 });
 
 Deno.test("index links to the article and shows its date and description", () => {
