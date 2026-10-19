@@ -25,13 +25,13 @@ routingIntent: "PLANNED_CHANGE"
 sessionName: "Migrate Deno to Bun"
 targetBranch: "main"
 deliveryBranch: "main"
-status: "reviewed"
 validatedCommit: "49fcef2be33786dda70675bf472babbd0258eeb8"
 workRecord:
   status: "generated"
   recordId: "64f24b03-17a5-4ee4-83f6-aa8f6e91aa7a"
   path: "docs/work-records/2026-10-19-bun-based-site-toolchain.md"
   lastAttemptAt: "2026-10-19T23:22:58.945Z"
+status: "verified"
 ---
 
 # Migrate the site toolchain from Deno to Bun

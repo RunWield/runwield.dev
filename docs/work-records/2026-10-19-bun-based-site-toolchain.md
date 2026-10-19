@@ -1,7 +1,7 @@
 ---
 kind: "work_record"
 recordId: "64f24b03-17a5-4ee4-83f6-aa8f6e91aa7a"
-status: "pending_verification"
+status: "approved"
 scope: "planned_change"
 workKind: "MAINTENANCE"
 origin: "internal"
