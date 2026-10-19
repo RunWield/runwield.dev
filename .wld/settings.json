@@ -1,3 +1,3 @@
 {
-  "verification_command": "deno task check && deno task build"
+  "verification_command": "bun run check && bun run build && bun test"
 }

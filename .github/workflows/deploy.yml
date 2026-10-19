@@ -20,12 +20,14 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
-      - name: Set up Deno
-        uses: denoland/setup-deno@v2
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          deno-version: v2.x
+          bun-version-file: package.json
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
       - name: Build static site
-        run: deno task build
+        run: bun run build
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
       - name: Upload site
