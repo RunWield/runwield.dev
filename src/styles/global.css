@@ -257,6 +257,11 @@ figure { margin: 0; }
 .planning { background: var(--rw-light); color: var(--rw-light-text); }
 .planning-heading h2 { max-width: 13ch; color: var(--rw-light-text); }
 .planning-heading > p { color: rgba(19, 33, 41, .72); }
+.why { padding-bottom: 0; }
+.why a { color: var(--rw-light-accent); text-decoration: underline; text-underline-offset: 4px; }
+.why a:hover { color: var(--rw-light-text); }
+.why a:focus-visible { outline: 2px solid var(--rw-light-accent); outline-offset: 4px; border-radius: 2px; }
+.why .why-link { font-family: var(--font-mono); font-size: .86rem; }
 .planning .product-image { box-shadow: 0 38px 100px rgba(19, 33, 41, .24); }
 .product-image, .review-image { margin-top: clamp(70px, 9vw, 130px); }
 .product-image figcaption, .review-image figcaption { display: grid; grid-template-columns: .65fr 1.35fr; gap: 30px; border-top: 1px solid var(--rw-border); padding: 18px; color: var(--rw-text-muted); font-size: .82rem; }
