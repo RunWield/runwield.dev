@@ -6,32 +6,34 @@ RunWield is for developers using AI on real codebases where intent, risk, and pr
 
 Core workflow: rough idea -> collaborative Plan -> deliberate execution -> validation -> Work Record -> better future planning.
 
-RunWield is source-available and free to use, but it is not open source yet. Consult the repository license before redistributing or modifying it.
+RunWield v0.14.0 and later are open source under the MIT license. The CLI, TUI, personal browser Workspace, and ACP server remain free forever. Model-provider charges are separate; third-party components retain their licenses.
 
 ## Product
+
+- [RunWield is open source](https://runwield.dev/blog/runwield-is-open-source): v0.14.0, MIT licensing, repository move, and skills migration.
 
 - [Features](https://runwield.dev/features): Project learning, planning, execution and review, Workspace, models, and customization.
 
 - [Wield Notes](https://runwield.dev/blog): Engineering judgment in the age of AI.
 
-- [RunWield README](https://raw.githubusercontent.com/gandazgul/runwield/main/README.md): Product overview, installation, workflow, architecture, current status, and license summary.
-- [Quickstart](https://raw.githubusercontent.com/gandazgul/runwield/main/docs/quickstart.md): Install RunWield, connect a model provider, initialize a project, and run the first task.
-- [Documentation index](https://raw.githubusercontent.com/gandazgul/runwield/main/docs/index.md): Entry point for the complete RunWield documentation.
+- [RunWield README](https://raw.githubusercontent.com/RunWield/runwield/main/README.md): Product overview, installation, workflow, architecture, current status, and license summary.
+- [Quickstart](https://docs.runwield.dev/quickstart/): Install RunWield, connect a model provider, initialize a project, and run the first task.
+- [Documentation index](https://docs.runwield.dev/): Entry point for the complete RunWield documentation.
 
 ## Workflows
 
-- [Plans and workflows](https://raw.githubusercontent.com/gandazgul/runwield/main/docs/workflows.md): How RunWield classifies work, creates Plans, executes approved changes, validates results, and records outcomes.
-- [Collaboration](https://raw.githubusercontent.com/gandazgul/runwield/main/docs/collaboration.md): Human-agent collaboration modes and review checkpoints.
-- [Settings](https://raw.githubusercontent.com/gandazgul/runwield/main/docs/settings.md): Configuration and model-provider settings.
-- [Customization](https://raw.githubusercontent.com/gandazgul/runwield/main/docs/customization.md): Project and user customization, agents, prompts, skills, and themes.
-- [Troubleshooting](https://raw.githubusercontent.com/gandazgul/runwield/main/docs/troubleshooting.md): Common installation and runtime problems.
+- [Plans and workflows](https://docs.runwield.dev/workflows/): How RunWield classifies work, creates Plans, executes approved changes, validates results, and records outcomes.
+- [Collaboration](https://docs.runwield.dev/collaboration/): Human-agent collaboration modes and review checkpoints.
+- [Settings](https://docs.runwield.dev/settings/): Configuration and model-provider settings.
+- [Customization](https://docs.runwield.dev/customization/): Project and user customization, agents, prompts, skills, and themes.
+- [Troubleshooting](https://docs.runwield.dev/troubleshooting/): Common installation and runtime problems.
 
 ## Try RunWield
 
-- [RunWield issues](https://github.com/gandazgul/runwield/issues): Ask a question, report a problem, or request guided early access.
+- [RunWield issues](https://github.com/RunWield/runwield/issues): Ask a question, report a problem, or request guided early access.
 - [Email beta@runwield.dev](mailto:beta@runwield.dev): Contact the RunWield beta directly.
 
 ## Optional
 
-- [RunWield source repository](https://github.com/gandazgul/runwield): Source, releases, issues, and contribution information.
-- [Brand-site source](https://github.com/gandazgul/runwield.dev): Source for the public RunWield website.
+- [RunWield source repository](https://github.com/RunWield/runwield): Source, releases, issues, and contribution information.
+- [Brand-site source](https://github.com/RunWield/runwield.dev): Source for the public RunWield website.

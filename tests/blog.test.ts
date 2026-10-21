@@ -100,7 +100,7 @@ test("blog metadata and assets resolve from both public URLs", () => {
 
 test("shared navigation retains home and external destinations", () => {
     for (const page of [home, index, article]) {
-        for (const href of ["/", "/#flow", "/blog", "https://docs.runwield.dev", "https://github.com/gandazgul/runwield/releases/latest", "/#beta"]) {
+        for (const href of ["/", "/#flow", "/blog", "https://docs.runwield.dev", "https://github.com/RunWield/runwield/releases/latest", "/#beta"]) {
             assert(page.includes(`href="${href}"`), `Navigation lacks ${href}`);
         }
     }
