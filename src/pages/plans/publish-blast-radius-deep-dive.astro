@@ -1,0 +1,11 @@
+---
+import PlanLayout from "../../layouts/PlanLayout.astro";
+import * as plan from "../../../docs/plans/publish-blast-radius-deep-dive.md";
+import source from "../../../docs/plans/publish-blast-radius-deep-dive.md?raw";
+---
+<PlanLayout plan={plan} source={source}
+    description="The actual Plan that caught inaccuracies in the Blast Radius article and recorded the corrections before publication.">
+    <p>This is the Plan used to publish the <a href="/blog/blast-radius-triage-and-planning-gates">Blast Radius article</a>.
+        A simple publication task exposed inaccuracies in the original draft. The accuracy table below records those
+        findings, the proposed corrections, and the decisions made before publication.</p>
+</PlanLayout>

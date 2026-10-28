@@ -47,6 +47,12 @@ Write the article here. Do not repeat the title or byline in the body.
 
 The filename sets the URL (`my-post.md` becomes `/blog/my-post`). The blog lists all Markdown posts with the newest `publishedDate` first. It sorts equal dates by filename. Use a quoted ISO date (`YYYY-MM-DD`) and keep it fixed after publication. Run `bun run build` and `bun run preview` to check the generated page and list before publication. The existing GitHub Pages workflow publishes `dist/` when changes reach `main`.
 
+## Publish a Plan example
+
+Keep the original Plan in `docs/plans/`. Add an Astro route under `src/pages/plans/` that imports the Plan as Markdown and as raw text, then passes both to `PlanLayout`. See `src/pages/plans/publish-blast-radius-deep-dive.astro` for an example.
+
+The layout uses the Plan's first heading as its title. It renders the original body and shows the original YAML front matter in a disclosure that is collapsed by default. Use the layout's slot for an introduction and a link back to the related article. Plan pages appear in the sitemap, but not in the blog post list.
+
 ## Beta form
 
 The default static-site fallback opens a prefilled email to `beta@runwield.dev`. To post submissions to a form service

@@ -1,0 +1,39 @@
+---
+import type { MarkdownInstance } from "astro";
+import BlogLayout from "./BlogLayout.astro";
+
+interface Props {
+    plan: MarkdownInstance<Record<string, unknown>>;
+    source: string;
+    description: string;
+}
+const { plan, source, description } = Astro.props;
+const title = plan.getHeadings()[0].text;
+// The layout owns the title; the rest of the original Plan stays unchanged.
+const body = (await plan.compiledContent()).replace(/^<h1\b[^>]*>[\s\S]*?<\/h1>\s*/, "");
+const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1];
+---
+<BlogLayout title={title} description={description}>
+    <article class="blog-column plan-page">
+        <header class="article-header"><h1>{title}</h1></header>
+        <div class="article-body">
+            <slot />
+            {frontmatter && <details class="plan-frontmatter">
+                <summary>Front matter</summary>
+                <pre><code>{frontmatter}</code></pre>
+            </details>}
+            <Fragment set:html={body} />
+        </div>
+    </article>
+</BlogLayout>
+<style>
+    .plan-frontmatter { margin-block: 1.65em; border-block: 1px solid var(--rw-border); }
+    .plan-frontmatter summary { padding-block: 12px; color: var(--rw-logo); cursor: pointer; }
+    .plan-frontmatter summary:hover { color: var(--rw-text-strong); }
+    .plan-frontmatter summary:focus-visible { outline: 2px solid var(--rw-accent); outline-offset: 5px; }
+    .plan-page :global(pre) { max-width: 100%; overflow-x: auto; padding: 16px; font-size: .85em; }
+    .plan-page :global(code) { overflow-wrap: anywhere; }
+    .plan-page :global(table) { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin-block: 1.65em; font-size: .85em; }
+    .plan-page :global(th), .plan-page :global(td) { min-width: 14ch; padding: 12px; border: 1px solid var(--rw-border); text-align: left; vertical-align: top; }
+    .plan-page :global(th) { color: var(--rw-text-strong); }
+</style>
