@@ -52,6 +52,43 @@ test("article renders the approved copy in order without unsupported claims", ()
     }
 });
 
+test("blast radius deep dive publishes the approved article and Plan Review figure", () => {
+    const route = "/blog/blast-radius-triage-and-planning-gates";
+    const title = "Architectural Deep Dive: Blast Radius Triage, Human Planning Gates, and Automated Verification";
+    const description = "How RunWield routes AI coding work by blast radius, gates risky changes behind Plan Review, and validates the result before human review.";
+    const page = readFileSync(`dist${route}/index.html`, "utf8");
+    const body = page.match(/<div class="article-body">([\s\S]*?)<\/div>/)?.[1];
+    assert(body, "Deep dive body is missing");
+    assert(page.includes(`<title>${title} | RunWield</title>`), "Deep dive page title is missing");
+    assert((page.match(/<h1[ >]/g) ?? []).length === 1 && page.includes(`<h1>${title}</h1>`), "Deep dive needs one title heading");
+    assert(page.includes('<time datetime="2026-10-28">October 28, 2026</time>'), "Deep dive date is missing");
+    assert(page.includes('<a href="https://github.com/gandazgul">Carlos Ravelo</a>'), "Deep dive linked byline is missing");
+    assert(description.length <= 160 && page.includes(`<meta name="description" content="${description}">`), "Deep dive description is missing or too long");
+    const headings = [...body.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/g)].map((match) => text(match[1]));
+    assert(JSON.stringify(headings) === JSON.stringify([
+        "Phase 1: Assessing the Blast Radius with the Router",
+        "Phase 2: The Mandatory Human Planning Gate and Inline Redlines",
+        "Phase 3: Automated Validation and Clean-Context Diff Review",
+        "Summary",
+    ]), "Deep dive sections must appear in order");
+    for (const phrase of ["Specification Document", "pull request", "rollback strategy", "path sensitivity", "planner agent", "Part 2", "second architectural deep dive"]) {
+        assert(!text(page).includes(phrase), `Removed draft phrase: ${phrase}`);
+    }
+    for (const phrase of ["In this architectural deep dive", "architectural implications and hidden dependencies", "run the project's checks", "structured Plan outlining the files it expects to change, the implementation steps, the risks, and how the change will be verified", "back to the Planner", "findings go to a repair session"]) {
+        assert(text(body).includes(phrase), `Approved wording is missing: ${phrase}`);
+    }
+    const figure = body.match(/<figure class="article-figure">([\s\S]*?)<\/figure>/);
+    assert(figure && figure.index !== undefined, "Plan Review figure is missing");
+    assert(figure[1].includes('href="/images/plan-review.png"') && figure[1].includes('src="/images/plan-review.png"'), "Plan Review full-size link and image are required");
+    assert(figure[1].includes('width="3024" height="1658" loading="lazy"') && /alt="[^"]+"/.test(figure[1]), "Plan Review image needs dimensions, lazy loading, and alt text");
+    assert(text(figure[1]).includes("annotate and redline a Plan before approval"), "Plan Review caption is missing");
+    assert(body.indexOf("inline redlines directly within the Plan.") < figure.index && figure.index < body.indexOf("Instead of rewriting the original prompt"), "Figure must follow the inline redlines paragraph");
+    assert(statSync("dist/images/plan-review.png").isFile(), "Plan Review image must resolve");
+    const firstPost = index.match(/<ul class="post-list">\s*<li>([\s\S]*?)<\/li>/)?.[1];
+    assert(firstPost?.includes(`<a href="${route}">${title}</a>`) && firstPost.includes(description) && firstPost.includes('<time datetime="2026-10-28">'), "Deep dive must be the newest index entry with its description and date");
+    assert(sitemap.includes(`<loc>https://runwield.dev${route}</loc>`), "Deep dive is missing from sitemap");
+});
+
 test("Vibe Code Is Legacy Code links to Steve Krouse's source article", () => {
     assert(legacyCodeArticle.includes('<a href="https://blog.val.town/vibe-code">Vibe code is legacy code</a>'), "Source article link is missing");
 });
