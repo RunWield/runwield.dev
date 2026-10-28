@@ -1,7 +1,7 @@
 ---
 kind: "work_record"
 recordId: "03662985-77ba-4289-b813-7f5823d07a00"
-status: "pending_verification"
+status: "approved"
 scope: "planned_change"
 workKind: "DOCUMENTATION"
 origin: "internal"
