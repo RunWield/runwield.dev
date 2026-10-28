@@ -19,6 +19,12 @@ sessionName: "Publish Article Draft"
 targetBranch: "main"
 deliveryBranch: "plan/publish-blast-radius-deep-dive"
 status: "reviewed"
+validatedCommit: "0cac351a48977f33a065c445123666a142ea1b67"
+workRecord:
+  status: "generated"
+  recordId: "03662985-77ba-4289-b813-7f5823d07a00"
+  path: "docs/work-records/2026-10-28-blast-radius-triage-and-planning-gates-article.md"
+  lastAttemptAt: "2026-10-28T13:48:13.103Z"
 ---
 
 # Publish "Architectural Deep Dive: Blast Radius Triage" on Wield Notes
