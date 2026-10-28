@@ -18,7 +18,7 @@ routingIntent: "PLANNED_CHANGE"
 sessionName: "Publish Article Draft"
 targetBranch: "main"
 deliveryBranch: "plan/publish-blast-radius-deep-dive"
-status: "implemented"
+status: "reviewed"
 ---
 
 # Publish "Architectural Deep Dive: Blast Radius Triage" on Wield Notes
