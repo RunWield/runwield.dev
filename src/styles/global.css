@@ -323,7 +323,8 @@ figure { margin: 0; }
 
 .site-footer { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; width: min(100% - 48px, 1440px); margin-inline: auto; border-top: 1px solid var(--rw-border); padding: 34px 0 42px; color: var(--rw-text-muted); font-size: .78rem; }
 .site-footer > p { text-align: center; }
-.site-footer > div { display: flex; justify-content: flex-end; gap: 28px; }
+.site-footer > div { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px 28px; }
+.site-footer > div > * { white-space: nowrap; }
 
 .site-header nav { flex-wrap: wrap; justify-content: flex-end; row-gap: 8px; }
 .site-header nav .blog-active { color: var(--rw-logo); }

@@ -30,6 +30,8 @@ RunWield v0.14.0 and later are open source under the MIT license. The CLI, TUI, 
 
 ## Try RunWield
 
+- [Downloads](https://runwield.dev/downloads): Core quick installer, Homebrew, latest release, and wld plugins for Codex and Claude Code.
+
 - [RunWield issues](https://github.com/RunWield/runwield/issues): Ask a question, report a problem, or request guided early access.
 - [Email beta@runwield.dev](mailto:beta@runwield.dev): Contact the RunWield beta directly.
 

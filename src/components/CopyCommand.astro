@@ -1,0 +1,44 @@
+---
+interface Props {
+    command: string;
+    label: string;
+}
+const { command, label } = Astro.props;
+---
+<div class="copy-command">
+    <div class="install-command-shell">
+        <code tabindex="0" aria-label={label}>{command}</code>
+        <button type="button" aria-label={`Copy ${label}`} hidden>Copy</button>
+    </div>
+    <p class="install-status" role="status" aria-live="polite"></p>
+</div>
+<style>
+    .copy-command { min-width: 0; }
+    .copy-command code { white-space: pre-wrap; overflow-wrap: anywhere; scrollbar-color: var(--rw-border) transparent; }
+    .copy-command button { min-height: 44px; }
+    .copy-command button[hidden] { display: none; }
+    .install-status { margin-top: 8px; }
+</style>
+<script>
+    document.querySelectorAll<HTMLElement>(".copy-command").forEach((block) => {
+        const code = block.querySelector("code");
+        const button = block.querySelector("button");
+        const status = block.querySelector<HTMLElement>("[role='status']");
+        if (!code || !button || !status) return;
+        button.hidden = false;
+        button.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(code.textContent ?? "");
+                status.textContent = "Copied to clipboard.";
+            } catch {
+                code.focus();
+                const range = document.createRange();
+                range.selectNodeContents(code);
+                const selection = window.getSelection();
+                selection?.removeAllRanges();
+                selection?.addRange(range);
+                status.textContent = "Couldn’t copy automatically. Copy the selected command.";
+            }
+        });
+    });
+</script>

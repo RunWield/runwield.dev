@@ -20,6 +20,12 @@ bun run preview
 
 Run `bun run check` to check the site. After a build, run `bun test` to check the generated blog output.
 
+## Downloads page
+
+`/downloads` lists the Core quick installer, Homebrew, the latest GitHub release, and both Connect plugins. Copyable
+commands use `src/components/CopyCommand.astro`. Keep these commands aligned with the Core quickstart and
+`RunWield/plugins` marketplace. The Codex listing links here through its `interface.websiteURL` metadata.
+
 ## Features page
 
 `/features` presents expandable categories using the existing site style. Curated copy lives in `src/data/features.ts`;

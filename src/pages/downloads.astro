@@ -1,0 +1,75 @@
+---
+import BlogLayout from "../layouts/BlogLayout.astro";
+import CopyCommand from "../components/CopyCommand.astro";
+import "../styles/downloads.css";
+
+const installer = "curl -fsSL https://raw.githubusercontent.com/RunWield/runwield/main/install.sh | bash";
+const homebrew = "brew install gandazgul/tap/wld";
+const codex = "codex plugin marketplace add RunWield/plugins\ncodex plugin add wld@runwield";
+const claudeMarketplace = "/plugin marketplace add RunWield/plugins";
+const claudePlugin = "/plugin install wld@runwield";
+---
+<BlogLayout title="Downloads" description="Install RunWield with the quick installer or Homebrew, download the latest release, and add the wld plugin to Codex or Claude Code.">
+    <div class="downloads-page">
+        <header class="downloads-intro">
+            <h1>Download <span>RunWield.</span></h1>
+            <p>Plan, build, and verify your next change. RunWield works in your terminal, or alongside you in Codex and Claude Code.</p>
+            <nav aria-label="Download options">
+                <a href="#core">Install Core</a>
+                <a href="#plugins">Add a plugin</a>
+                <a href="https://github.com/RunWield/runwield/releases/latest">Latest GitHub release <span aria-hidden="true">↗</span></a>
+            </nav>
+        </header>
+
+        <section class="download-section" id="core" aria-labelledby="core-title">
+            <div class="download-summary">
+                <h2 id="core-title">RunWield Core</h2>
+                <p>The <code>wld</code> command runs RunWield locally. Install it first, whether you use the terminal or a plugin.</p>
+                <a class="download-link" href="https://docs.runwield.dev/quickstart/">Read the quickstart <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="download-methods">
+                <section aria-labelledby="installer-title">
+                    <div class="download-method-heading"><h3 id="installer-title">Quick installer</h3><span>macOS &amp; Linux</span></div>
+                    <p>Run this in your terminal.</p>
+                    <CopyCommand command={installer} label="quick installer command" />
+                </section>
+                <section aria-labelledby="homebrew-title">
+                    <div class="download-method-heading"><h3 id="homebrew-title">Homebrew</h3><span>macOS</span></div>
+                    <p>Already use Homebrew? Install from our tap.</p>
+                    <CopyCommand command={homebrew} label="Homebrew install command" />
+                </section>
+                <div class="download-release">
+                    <div><h3>Prefer a direct download?</h3><p>Get the latest binaries and release notes on GitHub.</p></div>
+                    <a class="download-link" href="https://github.com/RunWield/runwield/releases/latest">Latest release <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="download-section" id="plugins" aria-labelledby="plugins-title">
+            <div class="download-summary">
+                <h2 id="plugins-title">RunWield Connect</h2>
+                <p>Bring RunWield’s planning, review, and delivery workflow into your coding host.</p>
+                <p>Both plugins use your host’s model access and need <code>wld</code> on your PATH. No separate RunWield account.</p>
+                <a class="download-link" href="https://github.com/RunWield/plugins">Browse the marketplace <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="download-methods">
+                <section aria-labelledby="codex-title">
+                    <div class="download-method-heading"><h3 id="codex-title">Codex</h3><span>Preview</span></div>
+                    <p>Run these commands in your terminal to add the RunWield marketplace and install <code>wld</code>.</p>
+                    <CopyCommand command={codex} label="Codex plugin install commands" />
+                    <p>Start a new chat in your project. Type <code>$wld</code> and select <code>$wld:run</code> to start a request.</p>
+                    <a class="download-link" href="https://docs.runwield.dev/connect-codex/">Codex setup guide <span aria-hidden="true">↗</span></a>
+                </section>
+                <section aria-labelledby="claude-title">
+                    <div class="download-method-heading"><h3 id="claude-title">Claude Code</h3><span>Preview</span></div>
+                    <p>Enter these commands one at a time in Claude Code.</p>
+                    <CopyCommand command={claudeMarketplace} label="Claude marketplace command" />
+                    <CopyCommand command={claudePlugin} label="Claude plugin install command" />
+                    <p>Restart if prompted. Start a request with <code>/wld:request</code>.</p>
+                    <a class="download-link" href="https://docs.runwield.dev/connect-claude-code/">Claude Code setup guide <span aria-hidden="true">↗</span></a>
+                </section>
+                <p class="download-migration">Already using <code>connect</code> or <code>runwield</code> as your plugin name? <a href="https://github.com/RunWield/plugins#migrate-from-an-older-plugin-name">Follow the migration steps</a> to switch to <code>wld</code>.</p>
+            </div>
+        </section>
+    </div>
+</BlogLayout>
