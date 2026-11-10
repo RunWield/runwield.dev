@@ -1,0 +1,7 @@
+---
+interface Props {
+    text: string;
+}
+const { text } = Astro.props;
+---
+{text.split("RunWield").map((part, index) => <Fragment>{index > 0 && <span class="brand-name">Run<span class="brand-accent">Wield</span></span>}{part}</Fragment>)}

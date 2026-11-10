@@ -1,4 +1,5 @@
 ---
+import BrandTitle from "../components/BrandTitle.astro";
 import type { MarkdownLayoutProps } from "astro";
 import BlogLayout from "./BlogLayout.astro";
 
@@ -19,7 +20,7 @@ const dateLabel = new Date(`${publishedDate}T12:00:00Z`).toLocaleDateString("en-
 <BlogLayout title={title} description={description} type="article">
     <article class="blog-column blog-article">
         <header class="article-header">
-            <h1>{title}</h1>
+            <h1><BrandTitle text={title} /></h1>
             <div class="article-meta">
                 <time datetime={publishedDate}>{dateLabel}</time>
                 <span aria-hidden="true">·</span>

@@ -1,4 +1,5 @@
 ---
+import BrandTitle from "../components/BrandTitle.astro";
 import BlogLayout from "../layouts/BlogLayout.astro";
 ---
 <BlogLayout title="Privacy Policy"
@@ -17,7 +18,7 @@ import BlogLayout from "../layouts/BlogLayout.astro";
                     The sections below explain those connections and the optional ways you can share data.</p>
             </section>
             <section aria-labelledby="local-storage">
-                <h2 id="local-storage">What RunWield stores on your machine</h2>
+                <h2 id="local-storage"><BrandTitle text="What RunWield stores on your machine" /></h2>
                 <ul>
                     <li><code>~/.wld/</code> stores settings in <code>settings.json</code>, credentials in
                         <code>auth.json</code>, model configuration in <code>models.json</code>, the update cache in

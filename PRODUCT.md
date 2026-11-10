@@ -24,6 +24,8 @@ The detailed inventory lives in the sibling RunWield repository at `docs/user-fa
 
 ## Brand Commitments
 
+In visible titles and headings, always render “Run” in white (`--rw-text-strong`) and “Wield” in mint (`--rw-logo`). Keep the name joined as RunWield.
+
 Keep the current RunWield visual style. The Features page uses high-level categories and expandable detail, inspired by the structure at https://voidleap.com/features/.
 
 ## Evidence on Hand

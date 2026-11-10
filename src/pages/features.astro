@@ -1,4 +1,5 @@
 ---
+import BrandTitle from "../components/BrandTitle.astro";
 import BlogLayout from "../layouts/BlogLayout.astro";
 import { featureGroups } from "../data/features";
 import "../styles/features.css";
@@ -24,7 +25,7 @@ import "../styles/features.css";
         {featureGroups.map((group, index) => (
           <section class="feature-group" id={group.id} aria-labelledby={`${group.id}-title`}>
             <div class="feature-meta"><span>{group.category}</span><span>{group.modules.length} areas</span></div>
-            <h2 id={`${group.id}-title`}>{group.title}</h2>
+            <h2 id={`${group.id}-title`}><BrandTitle text={group.title} /></h2>
             <p class="feature-description">{group.description}</p>
             <details class="feature-details" open={index === 0}>
               <summary>
@@ -35,7 +36,7 @@ import "../styles/features.css";
               <div class="feature-content">
                 {group.image && <figure class="feature-figure"><a href={group.image} aria-label={`View full-size ${group.imageCaption}`}><img src={group.image} alt={group.imageAlt} loading="lazy" width={group.imageWidth} height={group.imageHeight} /></a><figcaption>{group.imageCaption}</figcaption></figure>}
                 <div class="feature-modules">
-                  {group.modules.map(module => <section class="feature-module"><h3>{module.title}</h3>{module.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
+                  {group.modules.map(module => <section class="feature-module"><h3><BrandTitle text={module.title} /></h3>{module.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
                 </div>
                 <a class="features-text-link feature-docs" href={group.link}>{group.linkLabel}<span aria-hidden="true">↗</span></a>
               </div>
@@ -43,7 +44,7 @@ import "../styles/features.css";
           </section>
         ))}
         <section class="features-next" aria-labelledby="next-title">
-          <h2 id="next-title">Where RunWield is headed</h2>
+          <h2 id="next-title"><BrandTitle text="Where RunWield is headed" /></h2>
           <p>Next up: Connect will bring RunWield’s workflow into external coding hosts, starting with Claude Code. We’re also planning reusable software-factory components, broader team workflows, and a metrics dashboard with export. These features are on the roadmap.</p>
         </section>
       </div>

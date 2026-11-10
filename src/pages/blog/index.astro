@@ -1,4 +1,5 @@
 ---
+import BrandTitle from "../../components/BrandTitle.astro";
 import type { MarkdownInstance } from "astro";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 
@@ -26,7 +27,7 @@ const dateLabel = (date: string) => new Date(`${date}T12:00:00Z`).toLocaleDateSt
         <ul class="post-list">
             {posts.map((post) => <li>
                 <time datetime={post.frontmatter.publishedDate}>{dateLabel(post.frontmatter.publishedDate)}</time>
-                <h2><a href={post.url}>{post.frontmatter.title}</a></h2>
+                <h2><a href={post.url}><BrandTitle text={post.frontmatter.title} /></a></h2>
                 <p>{post.frontmatter.description}</p>
             </li>)}
         </ul>

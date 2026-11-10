@@ -1,4 +1,5 @@
 ---
+import BrandTitle from "../components/BrandTitle.astro";
 import BlogLayout from "../layouts/BlogLayout.astro";
 import CopyCommand from "../components/CopyCommand.astro";
 import "../styles/downloads.css";
@@ -12,7 +13,7 @@ const claudePlugin = "/plugin install wld@runwield";
 <BlogLayout title="Downloads" description="Install RunWield with the quick installer or Homebrew, download the latest release, and add the wld plugin to Codex or Claude Code.">
     <div class="downloads-page">
         <header class="downloads-intro">
-            <h1>Download <span>RunWield.</span></h1>
+            <h1><BrandTitle text="Download RunWield." /></h1>
             <p>Plan, build, and verify your next change. RunWield works in your terminal, or alongside you in Codex and Claude Code.</p>
             <nav aria-label="Download options">
                 <a href="#core">Install Core</a>
@@ -23,7 +24,7 @@ const claudePlugin = "/plugin install wld@runwield";
 
         <section class="download-section" id="core" aria-labelledby="core-title">
             <div class="download-summary">
-                <h2 id="core-title">RunWield Core</h2>
+                <h2 id="core-title"><BrandTitle text="RunWield Core" /></h2>
                 <p>The <code>wld</code> command runs RunWield locally. Install it first, whether you use the terminal or a plugin.</p>
                 <a class="download-link" href="https://docs.runwield.dev/quickstart/">Read the quickstart <span aria-hidden="true">↗</span></a>
             </div>
@@ -47,7 +48,7 @@ const claudePlugin = "/plugin install wld@runwield";
 
         <section class="download-section" id="plugins" aria-labelledby="plugins-title">
             <div class="download-summary">
-                <h2 id="plugins-title">RunWield Connect</h2>
+                <h2 id="plugins-title"><BrandTitle text="RunWield Connect" /></h2>
                 <p>Bring RunWield’s planning, review, and delivery workflow into your coding host.</p>
                 <p>Both plugins use your host’s model access and need <code>wld</code> on your PATH. No separate RunWield account.</p>
                 <a class="download-link" href="https://github.com/RunWield/plugins">Browse the marketplace <span aria-hidden="true">↗</span></a>

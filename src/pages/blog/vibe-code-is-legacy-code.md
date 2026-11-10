@@ -46,7 +46,7 @@ I realized I was not looking for a better autocomplete. I was looking for someth
 
 That is the loop RunWield is built around.
 
-## What RunWield Does Differently
+## What <span class="brand-name">Run<span class="brand-accent">Wield</span></span> Does Differently
 
 The core loop is simple to describe: ideate, plan, execute, record, use the record to plan better.
 
@@ -58,7 +58,7 @@ Every decision is recorded. The next task starts from what the system already kn
 
 Ceremony scales with risk. Quick fixes stay quick. Only complex or high-risk work triggers the full plan-review-execute-verify cycle.
 
-## The Problem Krouse Names Is the Problem RunWield Solves
+## The Problem Krouse Names Is the Problem <span class="brand-name">Run<span class="brand-accent">Wield</span></span> Solves
 
 Krouse's framing is useful because it is unambiguous. Vibe code is not a style of coding that becomes legacy code eventually. It is legacy code from the moment it is written, because the AI that wrote it cannot explain it, and the person who requested it never understood it. There is no theory of the system. There is only output.
 

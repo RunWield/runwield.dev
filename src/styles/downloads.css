@@ -1,7 +1,6 @@
 .downloads-page { max-width: 1120px; margin-inline: auto; }
 .downloads-intro { padding-bottom: 56px; }
 .downloads-intro h1 { margin: 0 0 24px; color: var(--rw-text-strong); font-size: clamp(2.8rem, 5.8vw, 5rem); font-weight: 620; line-height: 1.04; letter-spacing: -.035em; text-wrap: balance; }
-.downloads-intro h1 span { color: var(--rw-logo); }
 .downloads-intro > p { max-width: 62ch; margin: 0; color: var(--rw-text-muted); font-size: 1.2rem; line-height: 1.65; }
 .downloads-intro nav { display: flex; flex-wrap: wrap; gap: 14px 28px; margin-top: 28px; }
 .downloads-intro nav a, .download-link, .download-migration a { color: var(--rw-logo); text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
