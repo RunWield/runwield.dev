@@ -1,0 +1,223 @@
+---
+import { demoChapters, demoDuration, chapterStarts, formatDemoTime } from "../data/demo";
+import DemoPlanReview from "./DemoPlanReview.astro";
+import DemoCodeReview from "./DemoCodeReview.astro";
+import "../styles/demo.css";
+---
+
+<section class="run-demo" id="demo" aria-label="Interactive RunWield demo" data-demo>
+    <div class="demo-player">
+        <nav class="demo-chapters" aria-label="Demo chapters">
+            <div class="demo-chapters-heading">Follow the change</div>
+            <ol>
+                {demoChapters.map((chapter, index) => (
+                    <li>
+                        <button
+                            type="button"
+                            data-chapter={index}
+                            aria-current={index === 0 ? "step" : undefined}
+                            aria-controls="demo-stage"
+                        >
+                            <span class="demo-chapter-number">{String(index + 1).padStart(2, "0")}</span>
+                            <span>{chapter.title}</span>
+                            <time>{formatDemoTime(chapterStarts[index])}</time>
+                        </button>
+                    </li>
+                ))}
+            </ol>
+            <p class="demo-chapters-hint">Watch the run, or jump to any step.</p>
+        </nav>
+        <div class="demo-main">
+            <div class="demo-window-bar">
+                <span>
+                    <span class="demo-window-dot"></span> orders-app{" "}
+                    <span class="demo-window-path">/ export filtered orders</span>
+                </span>
+                <span data-surface-label>Terminal</span>
+            </div>
+            <div
+                class="demo-stage"
+                id="demo-stage"
+                tabindex="0"
+                aria-label="Demo screen. Space to play or pause. Left and right arrows skip five seconds."
+            >
+                {demoChapters.map((chapter, index) => (
+                    <div
+                        class:list={["demo-scene", `demo-scene-${chapter.surface}`]}
+                        data-scene={index}
+                        hidden={index !== 0}
+                    >
+                        {chapter.surface === "terminal" && (
+                            <div class="demo-terminal">
+                                <div
+                                    class="demo-terminal-scroll"
+                                    tabindex="0"
+                                    aria-label={`${chapter.title} terminal output`}
+                                >
+                                    {index === 0 && (
+                                        <div class="demo-terminal-welcome">
+                                            <img src="/logo.svg" alt="" width="84" height="66" />
+                                            <strong>
+                                                <span class="brand-name">
+                                                    Run<span class="brand-accent">Wield</span>
+                                                </span>{" "}
+                                                <span>— Plan-by-Default Harness</span>
+                                            </strong>
+                                            <p>Project context loaded. What would you like to build?</p>
+                                        </div>
+                                    )}
+                                    {chapter.lines.map((line) => (
+                                        <div
+                                            class:list={[
+                                                "demo-terminal-line",
+                                                `demo-line-${line.tone || "agent"}`,
+                                                { "demo-line-command": line.label === "$" },
+                                            ]}
+                                            data-cue={line.at}
+                                            hidden={line.at > 0}
+                                        >
+                                            <strong>{line.label}</strong>
+                                            <p
+                                                data-type-at={line.typeFor ? line.at : undefined}
+                                                data-type-for={line.typeFor}
+                                                data-text={line.typeFor ? line.text : undefined}
+                                            >
+                                                {line.typeFor ? "" : line.text}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div class="demo-terminal-input" aria-hidden="true">
+                                    {index === 0 && (
+                                        <span data-cue="1" data-until="6" hidden>
+                                            <span
+                                                data-type-at="1"
+                                                data-type-for="5"
+                                                data-text={chapter.lines[0].text}
+                                            ></span>
+                                        </span>
+                                    )}
+                                </div>
+                                <div class="demo-terminal-footer">
+                                    <span>
+                                        ~/projects/orders-app{" "}
+                                        <span class="demo-terminal-branch">
+                                            ({index < 2 ? "main" : "orders-csv-export"})
+                                        </span>
+                                    </span>
+                                    <strong>{chapter.agent}</strong>
+                                </div>
+                            </div>
+                        )}
+                        {(chapter.surface === "plan" ||
+                            chapter.surface === "annotations" ||
+                            chapter.surface === "approve") && <DemoPlanReview phase={chapter.surface} />}
+                        {chapter.surface === "code" && <DemoCodeReview />}
+                        {chapter.surface === "end" && (
+                            <div class="demo-end">
+                                <div class="demo-published">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="m5 12 4 4L19 6" />
+                                    </svg>{" "}
+                                    Publication confirmed
+                                </div>
+                                <h4>
+                                    A shipped change.
+                                    <br />A better starting point.
+                                </h4>
+                                <p>Filtered CSV export is on main. The next Plan can build on what this run learned.</p>
+                                <div class="demo-work-record">
+                                    <strong>Work Record · Export filtered orders</strong>
+                                    <dl>
+                                        <div>
+                                            <dt>Decisions</dt>
+                                            <dd>Admins only. All matching orders. No emails.</dd>
+                                        </div>
+                                        <div>
+                                            <dt>Validation</dt>
+                                            <dd>CI, AI review, and code review passed.</dd>
+                                        </div>
+                                        <div>
+                                            <dt>Lesson</dt>
+                                            <dd>CSV quoting and formula safety need separate tests.</dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                                <div class="demo-end-actions">
+                                    <a href="/downloads">
+                                        Try{" "}
+                                        <span class="brand-name">
+                                            Run<span class="brand-accent">Wield</span>
+                                        </span>
+                                        <span aria-hidden="true"> →</span>
+                                    </a>
+                                    <button type="button" data-replay>
+                                        Replay demo
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+            <div class="demo-caption">
+                <span data-caption-number>01 / 10</span>
+                <p data-caption>{demoChapters[0].caption}</p>
+            </div>
+            <div class="demo-controls">
+                <button class="demo-play" type="button" data-play aria-label="Play demo">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" data-play-icon>
+                        <path d="m8 5 11 7-11 7Z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" data-pause-icon>
+                        <path d="M8 5v14M16 5v14" />
+                    </svg>
+                    <span data-play-label>Play</span>
+                </button>
+                <button class="demo-skip" type="button" data-prev aria-label="Previous chapter" disabled>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 5v14m12-14L8 12l10 7Z" />
+                    </svg>
+                </button>
+                <button class="demo-skip" type="button" data-next aria-label="Next chapter">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M18 5v14M6 5l10 7-10 7Z" />
+                    </svg>
+                </button>
+                <input
+                    class="demo-seek"
+                    data-seek
+                    type="range"
+                    min="0"
+                    max={demoDuration}
+                    step="0.1"
+                    value="0"
+                    aria-label="Demo progress"
+                    aria-valuetext={`0:00 of ${formatDemoTime(demoDuration)}`}
+                />
+                <span class="demo-time">
+                    <span data-time>0:00</span> / {formatDemoTime(demoDuration)}
+                </span>
+                <label class="demo-speed">
+                    <span class="demo-sr-only">Playback speed</span>
+                    <select data-speed aria-label="Playback speed">
+                        <option value="1">1×</option>
+                        <option value="1.5">1.5×</option>
+                        <option value="2">2×</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
+    <span class="demo-sr-only" role="status" aria-live="polite" data-demo-status></span>
+    <noscript>
+        <p>
+            Enable JavaScript to play the interactive demo.{" "}
+            <a href="https://docs.runwield.dev">Read the workflow in the docs.</a>
+        </p>
+    </noscript>
+</section>
+<script>
+    import { initializeDemo } from "../scripts/demo-player";
+    document.querySelectorAll<HTMLElement>("[data-demo]").forEach(initializeDemo);
+</script>

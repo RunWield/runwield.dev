@@ -20,6 +20,13 @@ bun run preview
 
 Run `bun run check` to check the site. After a build, run `bun test` to check the generated blog output.
 
+## Interactive demo
+
+The homepage `#demo` plays a scripted HTML simulation of a complete RunWield change. It starts paused and provides
+chapter navigation, a scrubber, playback speed, and keyboard controls. No agent, model, or video download is involved.
+The script and timing live in `src/data/demo.ts`; product screens live in the `Demo*` components. See
+[`docs/design/demo.md`](docs/design/demo.md) for the scene contract and maintenance notes.
+
 ## Downloads page
 
 `/downloads` lists the Core quick installer, Homebrew, the latest GitHub release, and both Connect plugins. Copyable

@@ -1,0 +1,119 @@
+---
+interface Props {
+    phase: "plan" | "annotations" | "approve";
+}
+const { phase } = Astro.props;
+const revised = phase === "approve";
+---
+
+<div class="demo-review">
+    <div class="demo-review-bar">
+        <strong>
+            <img src="/logo.svg" alt="" width="25" height="20" /> Plan Review
+        </strong>
+        <div class="demo-review-actions">
+            <span class="demo-mode">Engineer · Autonomous</span>
+            <span class="demo-approve" data-cue={revised ? 0 : undefined} data-until={revised ? 4 : undefined}>
+                Approve &amp; Run
+            </span>
+            <span class="demo-approved" data-cue={revised ? 4 : undefined} hidden>
+                Approved
+            </span>
+        </div>
+    </div>
+    <div class="demo-review-workspace">
+        <div class="demo-plan-document">
+            <div class="demo-document-tools">
+                <span>View</span>
+                <span>
+                    Files <b>4</b>
+                </span>
+                <span class:list={[{ "demo-tool-selected": phase === "annotations" }]}>Select &amp; annotate</span>
+            </div>
+            <h4>Export filtered orders</h4>
+            <p class="demo-document-meta">Plan · {revised ? "Revised with your feedback" : "Ready for review"}</p>
+            <h5>Objective</h5>
+            <p>
+                Let admins download a CSV of all orders matching the current filters. Exclude customer email addresses.
+            </p>
+            <h5>Approach</h5>
+            <ol>
+                <li>Reuse the existing admin guard and orders query.</li>
+                <li>Include every matching order, across all pages.</li>
+                <li>
+                    <span
+                        class:list={[{ "demo-highlight": phase === "annotations" }]}
+                        data-highlight-at={phase === "annotations" ? 2 : undefined}
+                    >
+                        Add an Export CSV button to the orders toolbar.
+                    </span>
+                </li>
+                {revised && (
+                    <li class="demo-revision">Disable export when no orders match. Explain why beside the button.</li>
+                )}
+            </ol>
+            <h5>Verification</h5>
+            <p>
+                Test admin access, active filters, pagination, CSV escaping, and empty results. Run project CI and AI
+                review.
+            </p>
+            <p class="demo-file-list">export.ts · csv.ts · OrdersPage.tsx · csv.test.ts</p>
+        </div>
+        <aside class="demo-feedback" aria-label="Simulated planner conversation">
+            <div class="demo-feedback-title">{phase === "annotations" ? "Annotations & Planner" : "Plan context"}</div>
+            {phase === "plan" && (
+                <>
+                    <p class="demo-feedback-intro">The approach is yours to shape.</p>
+                    <p>Select text to leave an annotation, or chat with the Planner before approving.</p>
+                    <div class="demo-note" data-cue="4" hidden>
+                        <strong>Scope confirmed</strong>
+                        <p>Admins only. All matching orders. No customer emails.</p>
+                    </div>
+                </>
+            )}
+            {phase === "annotations" && (
+                <>
+                    <div class="demo-note" data-cue="3" hidden>
+                        <strong>Annotation · Approach</strong>
+                        <q>Add an Export CSV button…</q>
+                        <p
+                            data-type-at="4"
+                            data-type-for="3"
+                            data-text="Disable export when there are no matching orders."
+                        ></p>
+                    </div>
+                    <span class="demo-send" data-cue="8" data-until="11" hidden>
+                        Send Annotations
+                    </span>
+                    <div class="demo-chat-message" data-cue="11" hidden>
+                        <strong>You</strong>
+                        <p data-type-at="11" data-type-for="3" data-text="Can we explain why it’s disabled?"></p>
+                    </div>
+                    <div class="demo-chat-message demo-planner-message" data-cue="15" hidden>
+                        <strong>Planner</strong>
+                        <p
+                            data-type-at="15"
+                            data-type-for="4"
+                            data-text="Yes. I’ll add “No matching orders to export” beside the button, and cover it in the empty-state test."
+                        ></p>
+                    </div>
+                    <p class="demo-success" data-cue="21" hidden>
+                        Plan updated with your feedback.
+                    </p>
+                </>
+            )}
+            {revised && (
+                <>
+                    <div class="demo-note">
+                        <strong>Feedback incorporated</strong>
+                        <p>Empty-state behavior and its test are now part of the Plan.</p>
+                    </div>
+                    <p>Ready to implement in an isolated worktree.</p>
+                    <p class="demo-success" data-cue="4" hidden>
+                        Plan approved. Starting the Engineer…
+                    </p>
+                </>
+            )}
+        </aside>
+    </div>
+</div>

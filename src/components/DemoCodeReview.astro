@@ -1,0 +1,53 @@
+<div class="demo-review">
+    <div class="demo-review-bar">
+        <strong>
+            <img src="/logo.svg" alt="" width="25" height="20" /> Code Review
+        </strong>
+        <div class="demo-review-actions">
+            <span class="demo-mode">CI passed · AI review passed</span>
+            <span class="demo-approve" data-cue="0" data-until="20">
+                Approve
+            </span>
+            <span class="demo-approved" data-cue="20" hidden>
+                Approved
+            </span>
+        </div>
+    </div>
+    <div class="demo-review-workspace">
+        <div class="demo-code-document">
+            <div class="demo-document-tools">
+                <span>
+                    Files <b>4</b>
+                </span>
+                <span>Unified diff</span>
+                <span class="demo-success">+86 −4</span>
+            </div>
+            <div class="demo-diff-heading">src/orders/csv.ts</div>
+            <pre class="demo-diff"><code><span class="demo-diff-context">  1   export function csvCell(value: string) &#123;</span><span class="demo-diff-remove">  2 −   return `"$&#123;value&#125;"`;</span><span class="demo-diff-add">  2 +   const safe = /^[=+@\-\t\r\n]/.test(value)</span><span class="demo-diff-add">  3 +     ? `'$&#123;value&#125;` : value;</span><span class="demo-diff-add">  4 +   return `"$&#123;safe.replaceAll('"', '""')&#125;"`;</span><span class="demo-diff-context">  5   &#125;</span></code></pre>
+            <div class="demo-diff-heading">src/orders/OrdersPage.tsx</div>
+            <pre class="demo-diff"><code><span class="demo-diff-context">  40   &lt;ExportButton</span><span class="demo-diff-add">  41 +   disabled=&#123;matchingOrders === 0&#125;</span><span class="demo-diff-add">  42 +   filters=&#123;activeFilters&#125;</span><span class="demo-diff-context">  43   /&gt;</span><span class="demo-diff-add">  44 + &#123;matchingOrders === 0 &amp;&amp; (</span><span class="demo-diff-add">  45 +   &lt;p&gt;No matching orders to export&lt;/p&gt;</span><span class="demo-diff-add">  46 + )&#125;</span></code></pre>
+            <p class="demo-diff-summary" data-cue="16" hidden>
+                Reviewed: permissions, filter query, CSV safety, and empty-state behavior.
+            </p>
+        </div>
+        <aside class="demo-feedback" aria-label="Simulated code review conversation">
+            <div class="demo-feedback-title">Review chat</div>
+            <p class="demo-feedback-intro">Understand the change before it ships.</p>
+            <div class="demo-chat-message" data-cue="3" hidden>
+                <strong>You</strong>
+                <p data-type-at="3" data-type-for="3" data-text="Why prefix some values with an apostrophe?"></p>
+            </div>
+            <div class="demo-chat-message demo-planner-message" data-cue="8" hidden>
+                <strong>Reviewer</strong>
+                <p
+                    data-type-at="8"
+                    data-type-for="5"
+                    data-text="It keeps spreadsheet apps from treating untrusted text as a formula. CSV quoting handles delimiters; the prefix handles formula injection. Both have regression tests."
+                ></p>
+            </div>
+            <p class="demo-success" data-cue="20" hidden>
+                Approved. Publishing the verified change…
+            </p>
+        </aside>
+    </div>
+</div>

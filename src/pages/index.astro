@@ -6,6 +6,7 @@ import "@fontsource/ibm-plex-mono/600.css";
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import RunDemo from "../components/RunDemo.astro";
 
 const betaFormAction = import.meta.env.PUBLIC_BETA_FORM_ACTION || "mailto:beta@runwield.dev";
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -92,30 +93,21 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
     <section class="workflow section-shell" id="flow" aria-labelledby="workflow-title">
         <div class="section-heading">
-            <div class="section-index" data-reveal>How it works</div>
-            <h2 id="workflow-title" data-reveal><BrandTitle text="Introducing RunWield" /></h2>
-            <div class="workflow-copy" data-reveal>
-                <h3 class="workflow-secondary">From chat and hope, to plan and prove.</h3>
+            <h2 id="workflow-title">From chat and hope, to plan and prove.</h2>
+            <div class="workflow-copy">
                 <p class="workflow-detail"><strong>Finally, a coding harness optimized for more than just getting an
                     agent spitting out code as fast as possible.</strong></p>
             </div>
         </div>
 
-        <figure class="workflow-image" data-reveal>
-            <video controls playsinline preload="none" width="1920" height="1080"
-                   poster="media/runwield-demo-poster.jpg"
-                   aria-label="90-second RunWield demo: Plan Review, execution, validation, Code Review, and Workspace">
-                <source src="media/runwield-demo.mp4" type="video/mp4"/>
-                <a href="media/runwield-demo.mp4">Watch the 90-second RunWield demo</a>
-            </video>
-        </figure>
+        <RunDemo />
 
         <section class="key-features" id="key-features" aria-labelledby="key-features-title">
             <h3 class="section-index" id="key-features-title">Key features</h3>
             <ul class="key-features-list">
                 <li>
                     <h4>Any model. Subscription or API key.</h4>
-                    <p>Use the models you want with the subscriptions or API keys you already have. Switch providers as your needs change.</p>
+                    <p>Use the models you want with the subscriptions or API keys you already have. Switch providers as your needs change. RunWield uses pi-ai, the same library that powers the Pi Coding Agent.</p>
                 </li>
                 <li>
                     <h4>All local. Yours to control.</h4>
@@ -303,38 +295,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
         revealItems.forEach((item) => observer.observe(item));
     }
-
-    const workflowSection = document.querySelector(".workflow");
-    const desktopWorkflow = window.matchMedia("(min-width: 901px)");
-    let workflowFrame = 0;
-
-    const updateWorkflowPosition = () => {
-        workflowFrame = 0;
-        if (!(workflowSection instanceof HTMLElement)) return;
-
-        if (!desktopWorkflow.matches) {
-            workflowSection.style.removeProperty("opacity");
-            workflowSection.style.removeProperty("transform");
-            workflowSection.style.removeProperty("will-change");
-            return;
-        }
-
-        const progress = reducedMotion ? Number(window.scrollY > 8) : Math.min(Math.max(window.scrollY / 360, 0), 1);
-        workflowSection.style.opacity = `${progress}`;
-        workflowSection.style.transform = reducedMotion ? "none" : `translate3d(0, ${(1 - progress) * 140}px, 0)`;
-        workflowSection.style.willChange = progress > 0 && progress < 1 ? "transform, opacity" : "";
-    };
-
-    const requestWorkflowPosition = () => {
-        if (workflowFrame) return;
-        workflowFrame = window.requestAnimationFrame(updateWorkflowPosition);
-    };
-
-    updateWorkflowPosition();
-    window.addEventListener("scroll", requestWorkflowPosition, { passive: true });
-    window.addEventListener("resize", requestWorkflowPosition, { passive: true });
-    window.addEventListener("load", requestWorkflowPosition, { once: true });
-    window.addEventListener("pageshow", requestWorkflowPosition, { once: true });
 
     const betaForm = document.querySelector("[data-beta-form]");
     betaForm?.addEventListener("submit", (event) => {
